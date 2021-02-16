@@ -1,3 +1,5 @@
+// Braeden Lane
+
 // Handler to help with the tasks needed to use the submit event
 
 submitHandler =  function(e) {
