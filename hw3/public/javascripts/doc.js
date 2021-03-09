@@ -33,6 +33,15 @@ submitHandler =  function(e) {
 monthHandler = function() {
   var buttonText = $(this).text();
     $("#month").html(buttonText);
+    $.post('/orders', function(orderArray) {
+      $("#orderList0").hide();
+      $("#orderList1").hide();
+      $("#orderList2").hide();
+      var newOrderList0 = "<li>" + orderArray.data[0].zer.quantity + " " + orderArray.data[0].zer.topping + "</li>";
+      var newOrderList1 = "<li>" + orderArray.data[1].one.quantity + " " + orderArray.data[1].one.topping + "</li>";
+      var newOrderList2 = "<li>" + orderArray.data[2].two.quantity + " " + orderArray.data[2].two.topping + "</li>";
+      $("#orderList").append(newOrderList0, newOrderList1, newOrderList2);
+    });
 }
 
 // Main section of the code

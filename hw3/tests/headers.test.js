@@ -12,5 +12,4 @@ test('test selectEvent', () => {
     document.body.innerHTML = html;
     const $ = require('jquery');
     expect($('h1').html()).toBe("Cheesecake Order Form");
-    expect($('h3').html()).toBe("Orders for ");
 });
