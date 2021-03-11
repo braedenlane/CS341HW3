@@ -23,6 +23,12 @@ submitHandler =  function(e) {
     var dropdownAlert = "<p>Quantity: " + dropdownSel + "</p>"
     var notesAlert = "<p>Notes: " + ordernotes + "</p>"
 
+    $.post("https://localhost:3000/neworders",
+    {
+      quantity : $("quantity :selected").val(),
+      topping : $("input[name='topping']:checked").val(),
+      notes : $("#notes").val(),
+    });
     $("body").append(thankyou, toppingsAlert, dropdownAlert, notesAlert);
   }
   e.preventDefault();
@@ -33,14 +39,17 @@ submitHandler =  function(e) {
 monthHandler = function() {
   var buttonText = $(this).text();
     $("#month").html(buttonText);
-    $.post('/orders', function(orderArray) {
-      $("#orderList0").hide();
-      $("#orderList1").hide();
-      $("#orderList2").hide();
-      var newOrderList0 = "<li>" + orderArray.data[0].zer.quantity + " " + orderArray.data[0].zer.topping + "</li>";
-      var newOrderList1 = "<li>" + orderArray.data[1].one.quantity + " " + orderArray.data[1].one.topping + "</li>";
-      var newOrderList2 = "<li>" + orderArray.data[2].two.quantity + " " + orderArray.data[2].two.topping + "</li>";
-      $("#orderList").append(newOrderList0, newOrderList1, newOrderList2);
+    $.post('/orders',
+    {
+      month: buttonText,
+    },
+    function(orderArray) {
+      var newOrderList0 = orderArray.data[0].quantity + " " + orderArray.data[0].topping;
+      var newOrderList1 = orderArray.data[1].quantity + " " + orderArray.data[1].topping;
+      var newOrderList2 = orderArray.data[2].quantity + " " + orderArray.data[2].topping;
+      $("#orderList0").html(newOrderList0);
+      $("#orderList1").html(newOrderList1);
+      $("#orderList2").html(newOrderList2);
     });
 }
 
